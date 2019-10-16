@@ -1,0 +1,7 @@
+Format: http://dep.debian.net/deps/dep5
+Upstream-Name: wazo-rtpe-config
+Source: https://github.com/wazo-platform/wazo-rtpe-config.git
+
+Files: *
+Copyright: 2007-2018 The Wazo Authors
+License: GPL-3.0
