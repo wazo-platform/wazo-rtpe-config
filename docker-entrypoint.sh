@@ -17,7 +17,6 @@ recording-format=eth
 log-level=6
 delete-delay=0
 redis=$REDIS
-# subscribe-keyspace=$SUBSCRIBE_KEYSPACE
 EOF
 
 

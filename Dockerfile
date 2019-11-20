@@ -24,7 +24,7 @@ RUN apt-get update \
 EXPOSE 23000-32768/udp 22222/udp
 
 RUN mkdir -p /etc/rtpengine
-COPY ./rtpengine.conf /etc/rtpengine/rtpengine.conf
+COPY ./rtpengine.sample.conf /etc/rtpengine/rtpengine.sample.conf
 
 COPY ./docker-entrypoint.sh /docker-entrypoint.sh
 RUN chmod +x /docker-entrypoint.sh

@@ -5,7 +5,7 @@ set -e
 case "$1" in
     configure)
         mkdir -p /etc/rtpengine
-        cp /usr/share/wazo-rtpe-config/rtpengine.conf /etc/rtpengine/rtpengine.conf
+        cp /usr/share/wazo-rtpe-config/rtpengine.sample.conf /etc/rtpengine/rtpengine.sample.conf
     ;;
 
     abort-upgrade|abort-remove|abort-deconfigure)
