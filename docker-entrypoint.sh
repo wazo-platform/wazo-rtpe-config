@@ -23,6 +23,6 @@ EOF
 
 curl -X PUT \
     -d '{"ID": "'$HOSTNAME'", "Name": "rtp", "Tags": [ "rtp", "rtpengine" ], "Address": "'$IP_ADDRESS'", "Port": '$LISTEN_NG'}' \
-    http://consul:8500/v1/agent/service/register
+    http://${CONSUL_URI}/v1/agent/service/register
 
 rtpengine --config-file /etc/rtpengine/rtpengine.conf
