@@ -21,6 +21,9 @@ RUN apt-get update \
   && rm -Rf /usr/local/src/* \
   && rm -Rf /var/lib/apt/lists/*
 
+COPY ./scripts/wait-for /usr/bin/wait-for
+RUN chmod +x /usr/bin/wait-for
+
 EXPOSE 23000-32768/udp 22222/udp
 
 RUN mkdir -p /etc/rtpengine

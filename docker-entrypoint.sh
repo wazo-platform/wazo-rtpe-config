@@ -21,10 +21,8 @@ delete-delay=0
 redis=$REDIS
 EOF
 
-if ! [ -z "$WITH_CONSUL" ]; then
-    curl -X PUT \
+curl -X PUT \
     -d '{"ID": "'$HOSTNAME'", "Name": "rtp", "Tags": [ "rtp", "rtpengine" ], "Address": "'$IP_ADDRESS'", "Port": '$LISTEN_NG'}' \
-    $CONSUL_URI:$CONSUL_PORT/v1/agent/service/register
-fi
+    http://consul:8500/v1/agent/service/register
 
 rtpengine --config-file /etc/rtpengine/rtpengine.conf
