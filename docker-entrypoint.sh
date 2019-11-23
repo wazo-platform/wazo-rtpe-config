@@ -1,5 +1,8 @@
 #!/bin/bash
 date
+wait-for -t 60 $ROUTER_CONFD_URI
+wait-for -t 60 $CONSUL_URI
+sleep 2
 
 HOSTNAME=$(hostname)
 IP_ADDRESS=$(hostname -i)
@@ -26,3 +29,4 @@ curl -X PUT \
     http://${CONSUL_URI}/v1/agent/service/register
 
 rtpengine --config-file /etc/rtpengine/rtpengine.conf
+date
