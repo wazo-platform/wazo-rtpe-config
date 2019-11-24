@@ -24,9 +24,27 @@ delete-delay=0
 redis=$REDIS
 EOF
 
-curl -X PUT \
-    -d '{"ID": "'$HOSTNAME'", "Name": "rtp", "Tags": [ "rtp", "rtpengine" ], "Address": "'$IP_ADDRESS'", "Port": '$LISTEN_NG'}' \
-    http://${CONSUL_URI}/v1/agent/service/register
+# register/de-register service in consul
+curl -i -X PUT http://${CONSUL_URI}/v1/agent/service/register -d '{
+    "ID": "'$HOSTNAME'",
+    "Name": "rtp",
+    "Tags": ["rtp", "rtpengine"],
+    "Address": "'$IP_ADDRESS'",
+    "Port": '$LISTEN_NG'
+}'
+exit_script() {
+    curl -X PUT http://${CONSUL_URI}/v1/agent/service/deregister/$HOSTNAME
+    killall rtpengine
+    date
+    exit 143; # 128 + 15 -- SIGTERM
+}
+trap exit_script SIGINT SIGTERM
 
-rtpengine --config-file /etc/rtpengine/rtpengine.conf
-date
+# run rtpengine
+rtpengine --config-file /etc/rtpengine/rtpengine.conf &
+
+# wait for signals
+while true; do sleep 1; done
+
+# exit
+exit_script
