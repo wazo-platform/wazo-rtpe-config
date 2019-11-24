@@ -15,6 +15,7 @@ interface=$PUBLIC_IP
 foreground=true
 log-stderr=true
 listen-ng=$LISTEN_NG
+listen-cli=8000
 port-min=23000
 port-max=32768
 recording-dir=/tmp
