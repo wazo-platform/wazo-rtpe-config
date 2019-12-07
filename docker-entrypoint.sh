@@ -5,9 +5,13 @@ if ! [ -z "$CONSUL_URI" ]; then
     sleep 2
 fi
 
+if [ -z "$INTERFACE" ]; then
+    INTERFACE="eth0"
+fi
+PUBLIC_IP=$(ip -o -4 a | awk '$2 == "'$INTERFACE'" { gsub(/\/.*/, "", $4); print $4 }')
+
 HOSTNAME=$(hostname)
 IP_ADDRESS=$(hostname -i)
-PUBLIC_IP=$(ip -o -4 a | awk '$2 == "eth0" { gsub(/\/.*/, "", $4); print $4 }')
 
 cat << EOF > /etc/rtpengine/rtpengine.conf
 [rtpengine]
@@ -31,7 +35,7 @@ curl -i -X PUT http://${CONSUL_URI}/v1/agent/service/register -d '{
     "ID": "'$HOSTNAME'",
     "Name": "rtp",
     "Tags": ["rtp", "rtpengine"],
-    "Address": "'$IP_ADDRESS'",
+    "Address": "'$PUBLIC_IP'",
     "Port": '$LISTEN_NG'
 }'
 exit_script() {
