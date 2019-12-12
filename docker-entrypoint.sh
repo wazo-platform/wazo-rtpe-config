@@ -27,8 +27,13 @@ recording-method=pcap
 recording-format=eth
 log-level=6
 delete-delay=0
+EOF
+
+if ! [ -z "$WITH_REDIS" ]; then
+cat << EOF >> /etc/rtpengine/rtpengine.conf
 redis=$REDIS
 EOF
+fi
 
 # register/de-register service in consul
 curl -i -X PUT http://${CONSUL_URI}/v1/agent/service/register -d '{
