@@ -5,6 +5,7 @@ RUN apt-get update \
   libevent-dev libpcap-dev libxmlrpc-core-c3-dev markdown \
   libjson-glib-dev default-libmysqlclient-dev libhiredis-dev libssl-dev \
   libcurl4-openssl-dev libavcodec-extra gperf libspandsp-dev \
+  libwesockets-dev \
   && cd /usr/local/src \
   && git clone https://github.com/sipwise/rtpengine.git \
   && cd rtpengine/daemon \
